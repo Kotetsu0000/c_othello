@@ -1,7 +1,6 @@
 import numpy as np
 cimport numpy as cnp
 cimport cython
-from cython.parallel import prange
 from libcpp.vector cimport vector
 from libcpp.string cimport string
 from cpython cimport PyUnicode_FromString
@@ -75,11 +74,10 @@ cdef vector[string] _get_valid_moves(DTYPE_t[:, :] board, int color):
     cdef DTYPE_t[:, :] valid_board = _get_valid_board(board, color)
     cdef vector[string] valid_list
     cdef int x, y
-    for y in prange(8, nogil=True):
+    for y in range(8):
         for x in range(8):
             if valid_board[y, x] == 1:
-                with gil:
-                    valid_list.push_back((chr(y + ord('A')) + str(x)).encode(encoding='utf-8'))
+                valid_list.push_back((chr(y + ord('A')) + str(x)).encode(encoding='utf-8'))
     return valid_list
 ###
 
@@ -165,7 +163,7 @@ cpdef dict count_discs(DTYPE_t[:, :] board):
     cdef int black = 0
     cdef int white = 0
     cdef int x, y
-    for y in prange(8, nogil=True):
+    for y in range(8):
         for x in range(8):
             if board[y, x] == BLACK:
                 black += 1

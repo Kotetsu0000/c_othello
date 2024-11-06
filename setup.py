@@ -14,12 +14,12 @@ import numpy
 
 setup_kwargs = {
     'name': 'cython_othello',
-    'version': '0.0.3',
+    'version': '0.0.4',
     'description': 'Cython implementation of Othello game',
     'author': 'Kotetsu0000',
     'ext_modules': cythonize(
         [
-            Extension('c_othello.c_othello', ['c_othello/c_othello.pyx'], language='c++', extra_compile_args=['/openmp'], extra_link_args=['/openmp']),
+            Extension('c_othello.c_othello', ['c_othello/c_othello.pyx'], language='c++'),
         ],
         compiler_directives={'language_level': 3, 'embedsignature': True},
     ),
