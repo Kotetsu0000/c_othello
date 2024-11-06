@@ -14,7 +14,7 @@ import numpy
 
 setup_kwargs = {
     'name': 'cython_othello',
-    'version': '0.0.2',
+    'version': '0.0.3',
     'description': 'Cython implementation of Othello game',
     'author': 'Kotetsu0000',
     'ext_modules': cythonize(

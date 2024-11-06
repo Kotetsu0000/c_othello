@@ -129,8 +129,9 @@ cdef DTYPE_t[:, :] _put(DTYPE_t[:, :] board, int color, str position) nogil:
 ###
 
 cpdef cnp.ndarray[DTYPE_t, ndim=2] put(DTYPE_t[:, :] board, int color, str position):
-    if position not in get_valid_moves(board, color):
-        raise ValueError('Invalid move')
+    cdef list valid_moves = get_valid_moves(board, color)
+    if position not in valid_moves:
+        raise ValueError(f'Invalid move. {position} is not in {valid_moves}')
     return np.asarray(_put(board, color, position))
 ###
 
