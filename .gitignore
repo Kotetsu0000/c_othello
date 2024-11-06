@@ -1,0 +1,7 @@
+.env
+build
+*.pyd
+*.html
+**/__pycache__/
+cython_othello.egg-info
+test.py
